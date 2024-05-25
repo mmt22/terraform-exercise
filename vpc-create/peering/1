@@ -1,0 +1,36 @@
+# main.tf
+
+provider "aws" {
+  region = var.aws_region
+}
+
+# Peering Connection
+resource "aws_vpc_peering_connection" "vpc_peering" {
+  provider              = aws
+  vpc_id                = var.vpc1_id
+  peer_vpc_id           = var.vpc2_id
+  auto_accept           = true
+}
+
+# Route Table Association for VPC 1
+resource "aws_route_table_association" "vpc1_association" {
+  route_table_id = var.vpc1_route_table_id
+  subnet_id      = data.aws_subnet_ids.vpc1_subnets.ids[0] # Assuming one subnet for simplicity
+}
+
+# Route Table Association for VPC 2
+resource "aws_route_table_association" "vpc2_association" {
+  route_table_id = var.vpc2_route_table_id
+  subnet_id      = data.aws_subnet_ids.vpc2_subnets.ids[0] # Assuming one subnet for simplicity
+}
+
+# Data Block for Subnet IDs in VPC 1
+data "aws_subnet_ids" "vpc1_subnets" {
+  vpc_id = var.vpc1_id
+}
+
+# Data Block for Subnet IDs in VPC 2
+data "aws_subnet_ids" "vpc2_subnets" {
+  vpc_id = var.vpc2_id
+}
+
