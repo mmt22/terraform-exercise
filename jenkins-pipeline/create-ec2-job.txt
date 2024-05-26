@@ -1,0 +1,50 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                // Pull the latest changes from the repository
+                dir('/var/lib/jenkins/workspace/create-ec2-job') {
+                    sh 'git pull origin main'
+                }
+            }
+        }
+        
+        stage('Run Terraform Commands') {
+            steps {
+                // Change to the subdirectory containing the Terraform files
+                dir('/var/lib/jenkins/workspace/create-ec2-job/ec2-webserver/') {
+                    // Execute Terraform commands in this directory
+                    script {
+                        // Initialize Terraform
+                        sh 'terraform init'
+
+                        // Validate Terraform configuration
+                        sh 'terraform validate'
+
+                        // Plan the Terraform changes
+                        sh 'terraform plan'
+
+                        // Apply the Terraform changes
+                        sh 'terraform apply -auto-approve'
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline completed.'
+        }
+        success {
+            echo 'Pipeline completed successfully.'
+        }
+        failure {
+            echo 'Pipeline failed.'
+            // Optionally add notification steps here
+        }
+    }
+}
+
