@@ -52,7 +52,7 @@ resource "aws_instance" "apache2-linux-2" {
 
 }
 
-### Security Group Rules ####
+### Security Group Rules whitelist ####
 
 
 
