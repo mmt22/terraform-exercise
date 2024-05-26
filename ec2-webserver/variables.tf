@@ -1,7 +1,7 @@
 variable "region" {
   type        = string
   description = "The AWS region."
-  default     = "ap-south-1"
+  default     = "us-east-1"
 }
 
 variable "instance_type" {
@@ -19,7 +19,7 @@ variable "key_name" {
 variable "vpc_id" {
   type        = string
   description = "VPC ID"
-  default     = "vpc-0d923e7ee6f36cb17"
+  default     = "vpc-0d923e7ee6f36cb17 "
 }
 
 variable "vpc_security_group_ids" {
