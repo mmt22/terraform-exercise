@@ -46,7 +46,7 @@ resource "aws_instance" "apache2-linux-2" {
   tags = {
 
     "Name" : "apache2-linux-2"
-    "env" : "dev"
+    "env" : "prod"
     "os" : "ubuntu"
   }
 
