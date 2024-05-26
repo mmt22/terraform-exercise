@@ -1,5 +1,11 @@
 resource "aws_instance" "apache2-linux" {
-  availability_zone      = "us-east-1a"
+
+  ami                    = "ami-0f58b397bc5c1f2e8"
+  instance_type          = "t3.micro"
+  key_name               = "website"
+  vpc_security_group_ids = ["sg-06dfa5c2367f1db33"]
+  iam_instance_profile   = "SSM-ROLE-EC2"
+  availability_zone      = "ap-south-1a"
   user_data              = file("./apache2.sh")
   root_block_device {
     volume_type           = "gp3"
@@ -27,7 +33,7 @@ resource "aws_security_group_rule" "allow_ssh" {
   to_port           = 80
   protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]          # Replace YOUR_IP_ADDRESS with the IP you want to whitelist
-  security_group_id = "sg-0c01ed90f6882d3bc" # Replace with the ID of your existing security group
+  security_group_id = "sg-06dfa5c2367f1db33" # Replace with the ID of your existing security group
 }
 
 
