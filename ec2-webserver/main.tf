@@ -27,14 +27,6 @@ resource "aws_instance" "apache2-linux" {
 
 ### Security Group Rules ####
 
-resource "aws_security_group_rule" "allow_ssh" {
-  type              = "ingress"
-  from_port         = 80
-  to_port           = 80
-  protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0"]          # Replace YOUR_IP_ADDRESS with the IP you want to whitelist
-  security_group_id = "sg-06dfa5c2367f1db33" # Replace with the ID of your existing security group
-}
 
 
 
