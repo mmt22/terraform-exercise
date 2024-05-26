@@ -1,10 +1,4 @@
 resource "aws_instance" "apache2-linux" {
-
-  ami                    = "ami-04b70fa74e45c3917"
-  instance_type          = "t3.micro"
-  key_name               = "website"
-  vpc_security_group_ids = ["sg-0c01ed90f6882d3bc"]
-  iam_instance_profile   = "SSM-ROLE-EC2"
   availability_zone      = "us-east-1a"
   user_data              = file("./apache2.sh")
   root_block_device {
