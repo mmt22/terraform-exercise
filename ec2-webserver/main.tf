@@ -1,5 +1,4 @@
-resource "aws_instance" "apache2-linux" {
-
+resource "aws_instance" "apache2-ec2" {
   ami                    = "ami-0f58b397bc5c1f2e8"
   instance_type          = "t3.micro"
   key_name               = "website"
@@ -25,7 +24,7 @@ resource "aws_instance" "apache2-linux" {
 
 }
 
-resource "aws_instance" "apache2-linux-2" {
+resource "aws_instance" "nginx-ec2" {
 
   ami                    = "ami-0f58b397bc5c1f2e8"
   instance_type          = "t3.micro"
@@ -33,7 +32,7 @@ resource "aws_instance" "apache2-linux-2" {
   vpc_security_group_ids = ["sg-06dfa5c2367f1db33"]
   iam_instance_profile   = "SSM-ROLE-EC2"
   availability_zone      = "ap-south-1a"
-  user_data              = file("./apache2.sh")
+  user_data              = file("./nginx.sh")
   root_block_device {
     volume_type           = "gp3"
     volume_size           = 8
@@ -45,8 +44,8 @@ resource "aws_instance" "apache2-linux-2" {
   }
   tags = {
 
-    "Name" : "apache2-linux-2"
-    "env" : "prod"
+    "Name" : "nginx-webapp-2"
+    "env" : "dev"
     "os" : "ubuntu"
   }
 
