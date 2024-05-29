@@ -18,3 +18,4 @@ output "ec2-eni-id" {
   value = aws_instance.nginx1.primary_network_interface_id
 }
 
+

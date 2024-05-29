@@ -132,3 +132,7 @@ output "alb-dns" {
 output "alb-zone-id" {
   value = module.wp-alb.alb-zoneid
 }
+
+output "ec2-public_ip" {
+  value = module.ec2-Instance2.ec2-publicip  
+}
