@@ -13,7 +13,7 @@ module "ec2-Instance1" {
   vpc_id                 = module.prod-vpc.vpc-id
   subnet-id              = module.prod-vpc.publicsub-1-id
   vpc_security_group_ids = ["sg-09f86f4ed77a942dd"]
-  userdatafile           = file("./nginx.sh")
+  userdatafile           = file("./pritunl-vpn.sh")
   volume_type            = "gp3"
   volume_size            = 8
   volume_encryption      = true
