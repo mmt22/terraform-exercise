@@ -15,6 +15,8 @@ module "prod-vpc" {
   private-rt-name      = "mmt-infra-private-RT"
 }
 
+#new line
+
 resource "aws_security_group" "ec2-sg" {
   name        = "webapp-sg"
   description = "alb-sg"
