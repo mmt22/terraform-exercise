@@ -10,8 +10,8 @@ module "ec2-Instance1" {
   ami                    = "ami-0f58b397bc5c1f2e8"
   key_name               = "website"
   iam_instance_profile   = "SSM-ROLE-EC2"
-  vpc_id                 = module.prod-vpc.vpc-id
-  subnet-id              = module.prod-vpc.publicsub-1-id
+  vpc_id                 = "vpc-0a3883e9ada023338"
+  subnet-id              = "subnet-018a59486a00aae39"
   vpc_security_group_ids = ["sg-09f86f4ed77a942dd"]
   userdatafile           = file("./pritunl-vpn.sh")
   volume_type            = "gp3"
