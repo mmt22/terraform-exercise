@@ -4,7 +4,7 @@ provider "aws" {
 
 module "prod-vpc" {
   source               = "./module/ec2-instance/alb/vpc"
-  vpc_name             = "mmt-infra"
+  vpc_name             = "mmt-infra-vpc"
   vpc-cidr             = "27.0.0.0/16"
   public-subnet1-cidr  = "27.0.1.0/24"
   public-subnet2-cidr  = "27.0.2.0/24"
@@ -14,6 +14,8 @@ module "prod-vpc" {
   public-rt-name       = "mmt-infra-public-RT"
   private-rt-name      = "mmt-infra-private-RT"
 }
+
+#new lines
 
 resource "aws_security_group" "ec2-sg" {
   name        = "webapp-sg"
