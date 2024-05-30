@@ -128,7 +128,7 @@ module "asg-lt" {
 module "asg-grp" {
 
   source               = "./module/asg-conf"
-  asg-name             = "pratikjoshidevops.live"
+  asg-name             = "pratikjoshidevopsinfo.live"
   lt-id                = module.asg-lt.lt-id
   desired-cap          = 2
   min-cap              = 2
