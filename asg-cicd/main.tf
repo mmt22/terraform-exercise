@@ -4,7 +4,7 @@ provider "aws" {
 
 resource "aws_alb" "lb1" {
   name            = "app1-cicd-alb"
-  security_groups = ["sg-06dfa5c2367f1db33"]
+  security_groups = [module.asg-lt.sg-id]
   subnets         = ["subnet-03636e6840a6a7933", "subnet-093e8e872dc6ed5d4"]
   internal        = false
   tags = {
@@ -12,7 +12,7 @@ resource "aws_alb" "lb1" {
   }
 }
 
-resource "aws_lb_target_group" "app1-tg" {
+resource "aws_lb_target_group" "cicd-tg" {
   name     = "cicd-app1-tg"
   port     = 80
   protocol = "HTTP"
@@ -35,7 +35,7 @@ resource "aws_lb_listener" "lb-listener" {
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.app1-tg.arn
+    target_group_arn = aws_lb_target_group.cicd-tg.arn
   }
 }
 
@@ -59,10 +59,10 @@ module "asg-grp1" {
   asg-name             = "asg-grp1"
   lt-id                = module.asg-lt.id
   desired-cap          = 1
-  min-cap              = 1
+  min-cap              = 2
   max-cap              = 2
   termination_policies = ["OldestInstance"]
-  target-grp-arn       = [aws_lb_target_group.app1-tg.arn]
+  target-grp-arn       = [aws_lb_target_group.cicd-tg.arn]
 }
 
 
