@@ -88,7 +88,7 @@ resource "aws_lb_listener_rule" "redirect_http_to_https" {
 
   condition {
     host_header {
-      values = ["pratikjoshidevopsinf.live","*.pratikjoshidevopsinfo.live"]
+      values = ["pratikjoshidevopsinf.live", "*.pratikjoshidevopsinfo.live"]
     }
   }
 }
@@ -115,7 +115,7 @@ module "asg-lt" {
 
   source        = "./module/lauch-temp"
   lt-name       = "cicd-lt"
-  ami-id        = "ami-05fc4839865dc5892"
+  ami-id        = "ami-08504310369dd4c87"
   instance_type = "t3.micro"
   sg-ids        = ["sg-06dfa5c2367f1db33"]
   pem-key       = "website"

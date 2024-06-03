@@ -18,5 +18,11 @@ resource "aws_autoscaling_group" "autoscale" {
     value = "${var.asg-name}-ASG"
     propagate_at_launch = true
   }
+
+  tag {
+    key = "Application"
+    value = "pratikjoshidevopsinfo.live"
+    propagate_at_launch = true
+  }
   
 }

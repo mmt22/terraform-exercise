@@ -1,7 +1,7 @@
 #!/bin/bash
-
-sudo apt update -y
-sudo apt install apache2 -y
-sudo apt install net-tools -y
-sudo systemctl enable apache2 --now
-echo "<center><h1>This is a ASG EC2-1 with Apache2 Webserver</h1></center>" > /var/www/html/*.html
+sudo apt install wget -y
+cd /home/ubuntu
+sudo apt install ruby-full -y
+wget https://aws-codedeploy-ap-south-1.s3.ap-south-1.amazonaws.com/latest/install
+sudo chmod +x ./install
+sudo ./install auto
