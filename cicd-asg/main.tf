@@ -114,9 +114,9 @@ module "asg-grp" {
   source               = "./module/asg-conf"
   asg-name             = "pratikjoshidevopsinfo.live"
   lt-id                = module.asg-lt.lt-id
-  desired-cap          = 0
-  min-cap              = 0
-  max-cap              = 0
+  desired-cap          = 2
+  min-cap              = 2
+  max-cap              = 2
   termination_policies = ["Default"]
   target-grp-arn       = [aws_lb_target_group.cicd-tg-80.arn, aws_lb_target_group.cicd-tg-443.arn]
 }
