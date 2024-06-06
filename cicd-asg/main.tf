@@ -10,7 +10,7 @@ resource "aws_alb" "cicd-alb" {
   subnets         = ["subnet-03636e6840a6a7933", "subnet-093e8e872dc6ed5d4", "subnet-0d9a0ab4b3a8501ca"]
   internal        = false
   tags = {
-    Name = "cicd-alb"
+    Name = "cicd-asg-alb"
   }
 }
 
