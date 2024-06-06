@@ -95,21 +95,6 @@ resource "aws_lb_listener_rule" "redirect_http_to_https" {
 
 /// END OF ALB BLOCK ///
 
-
-//resource "aws_lb_target_group_attachment" "cicd_tg_attach_1" {
- // target_group_arn = aws_lb_target_group.cicd-tg-80.arn
- // target_id        = "i-07e860f1959dbfa57"
- //port             = 80
-//}
-
-//resource "aws_lb_target_group_attachment" "cicd_tg_attach_2" {
-//  target_group_arn = aws_lb_target_group.cicd-tg-443.arn
- // target_id        = "i-07e860f1959dbfa57"
- // port             = 443
-//}
-
-
-
 module "asg-lt" {
 
   source        = "./module/lauch-temp"
