@@ -2,7 +2,7 @@ provider "aws" {
   region = "ap-south-1"
 }
 
-/// ALB BLOCK Starts Here !!!!
+/// ALB BLOCK Starts Here !!!
 
 resource "aws_alb" "cicd-alb" {
   name            = "cicd-alb"
