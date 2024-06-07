@@ -13,7 +13,7 @@ variable "ami" {
 variable "instance_type" {
   type        = string
   description = "Instance Type"
-  default     = "t3.medium"
+  default     = "t3a.medium"
 }
 
 variable "key_name" {
