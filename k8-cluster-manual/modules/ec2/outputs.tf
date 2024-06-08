@@ -21,3 +21,7 @@ output "ec2-publicdns" {
 output "ec2-eni-id" {
   value = aws_instance.k8-master.primary_network_interface_id
 }
+
+output "k8master-ip" {
+  value = aws_instance.k8-master.private_ip
+}

@@ -75,6 +75,8 @@ sudo apt-mark hold kubelet kubeadm kubectl
 sudo systemctl enable --now kubelet
 sudo systemctl restart kubelet
 
+#### Need to configure mater node first and change the join command below ###
+
 kubeadm join 27.0.1.140:6443 --token 17stt9.bquwkfpm2ztluwr7 \
         --discovery-token-ca-cert-hash sha256:80e35ce80ecd3a83f1b76caa4494164ec2f9846017b4124562600654b3877637
 

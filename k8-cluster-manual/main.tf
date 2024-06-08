@@ -14,7 +14,7 @@ module "prod-vpc" {
 #new lines ##
 resource "aws_security_group" "k8-master-sg" {
   name        = "k8-master-sg"
-  description = "alb-sg"
+  description = "k8-master-sg"
   vpc_id      = module.prod-vpc.vpc-id
 
   ingress {
@@ -35,7 +35,7 @@ resource "aws_security_group" "k8-master-sg" {
 
 resource "aws_security_group" "k8-node1-sg" {
   name        = "k8-node1-sg"
-  description = "alb-sg"
+  description = "k8-node1-sg"
   vpc_id      = module.prod-vpc.vpc-id
 
   ingress {
@@ -143,7 +143,7 @@ resource "aws_eip" "eip1" {
   instance = module.k8-master.ec2-instanceid
   domain   = "vpc"
   tags = {
-    "Name" : "K8-Master-EIP"
+    "Name" : "k8-master-EIP"
   }
 }
 
