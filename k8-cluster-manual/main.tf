@@ -56,7 +56,7 @@ resource "aws_security_group" "k8-node1-sg" {
 module "k8-master" {
   source                 = "./modules/ec2"
   region                 = "ap-south-1"
-  instance_name          = "k8-master-Node"
+  instance_name          = "k8-master"
   instance_type          = "t3a.medium"
   ami                    = "ami-05e00961530ae1b55"
   key_name               = "website"
@@ -72,7 +72,6 @@ module "k8-master" {
   source_dest_check      = true
 }
 
-
 module "k8-node1" {
   source                 = "./modules/ec2"
   region                 = "ap-south-1"
@@ -82,7 +81,7 @@ module "k8-node1" {
   key_name               = "website"
   iam_instance_profile   = "SSM-ROLE-EC2"
   vpc_id                 = module.prod-vpc.vpc-id
-  subnet-id              = module.prod-vpc.privatesub-1-id
+  subnet-id              = module.prod-vpc.publicsub-1-id
   vpc_security_group_ids = [aws_security_group.k8-master-sg.id]
   userdatafile           = file("k8-node.sh")
   volume_type            = "gp3"
@@ -102,7 +101,7 @@ module "k8-node2" {
   key_name               = "website"
   iam_instance_profile   = "SSM-ROLE-EC2"
   vpc_id                 = module.prod-vpc.vpc-id
-  subnet-id              = module.prod-vpc.privatesub-2-id
+  subnet-id              = module.prod-vpc.publicsub-2-id
   vpc_security_group_ids = [aws_security_group.k8-master-sg.id]
   userdatafile           = file("k8-node.sh")
   volume_type            = "gp3"
@@ -112,7 +111,7 @@ module "k8-node2" {
   source_dest_check      = true
 }
 
-
+/*
 module "nat-ec2" {
   source                 = "./modules/ec2"
   region                 = "ap-south-1"
@@ -139,6 +138,20 @@ resource "aws_route" "nat-instance-route" {
   network_interface_id   = module.nat-ec2.ec2-eni-id
 }
 
+resource "aws_lb_target_group_attachment" "tg_attach_1" {
+  target_group_arn = module.k8-alb.alb-tg-arn
+  target_id        = module.k8-node1.ec2-instanceid
+  port             = 80
+}
+
+resource "aws_lb_target_group_attachment" "tg_attach_2" {
+  target_group_arn = module.k8-alb.alb-tg-arn
+  target_id        = module.k8-node2.ec2-instanceid
+  port             = 80
+}
+
+*/
+
 resource "aws_eip" "eip1" {
   instance = module.k8-master.ec2-instanceid
   domain   = "vpc"
@@ -154,18 +167,6 @@ module "k8-alb" {
   subnetid    = [module.prod-vpc.publicsub-1-id, module.prod-vpc.publicsub-2-id]
   alb-sg-name = "k8-alb-sg"
   alb-tg-name = "k8-tg"
-}
-
-resource "aws_lb_target_group_attachment" "tg_attach_1" {
-  target_group_arn = module.k8-alb.alb-tg-arn
-  target_id        = module.k8-node1.ec2-instanceid
-  port             = 80
-}
-
-resource "aws_lb_target_group_attachment" "tg_attach_2" {
-  target_group_arn = module.k8-alb.alb-tg-arn
-  target_id        = module.k8-node2.ec2-instanceid
-  port             = 80
 }
 
 resource "aws_lb_listener_rule" "host_header_rule" {

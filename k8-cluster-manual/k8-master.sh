@@ -4,6 +4,10 @@ sudo apt-get update -y
 
 sudo apt install net-tools -y
 
+sudo echo "export KUBECONFIG=/etc/kubernetes/admin.conf" >> /etc/profile.d/kubeconfig.sh
+
+sudo chmod +x /etc/profile.d/kubeconfig.sh
+
 # Disable swap and prevent it from being reactivated
 sudo swapoff -a
 sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
