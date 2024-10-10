@@ -1,11 +1,11 @@
 module "prod-vpc" {
   source               = "./modules/vpc"
   vpc_name             = "k8-infra-vpc"
-  vpc-cidr             = "27.0.0.0/16"
-  public-subnet1-cidr  = "27.0.1.0/24"
-  public-subnet2-cidr  = "27.0.2.0/24"
-  private-subnet1-cidr = "27.0.3.0/24"
-  private-subnet2-cidr = "27.0.4.0/24"
+  vpc-cidr             = "28.0.0.0/16"
+  public-subnet1-cidr  = "28.0.1.0/24"
+  public-subnet2-cidr  = "28.0.2.0/24"
+  private-subnet1-cidr = "28.0.3.0/24"
+  private-subnet2-cidr = "28.0.4.0/24"
   igw-name             = "k8-infra-IGW"
   public-rt-name       = "k8-infra-public-RT"
   private-rt-name      = "k8-infra-private-RT"
@@ -72,6 +72,9 @@ module "k8-master" {
   source_dest_check      = true
 }
 
+
+
+
 module "k8-node1" {
   source                 = "./modules/ec2"
   region                 = "ap-south-1"
@@ -111,13 +114,14 @@ module "k8-node2" {
   source_dest_check      = true
 }
 
-/*
+
+
 module "nat-ec2" {
   source                 = "./modules/ec2"
   region                 = "ap-south-1"
   instance_name          = "nat-ec2"
   instance_type          = "t3a.small"
-  ami                    = "ami-07f197c9052039d8c"
+  ami                    = "ami-0041d23df243bffc3"
   key_name               = "website"
   iam_instance_profile   = "SSM-ROLE-EC2"
   vpc_id                 = module.prod-vpc.vpc-id
@@ -132,11 +136,13 @@ module "nat-ec2" {
 }
 
 
+
 resource "aws_route" "nat-instance-route" {
   route_table_id         = module.prod-vpc.route_table_id
   destination_cidr_block = "0.0.0.0/0"
   network_interface_id   = module.nat-ec2.ec2-eni-id
 }
+
 
 resource "aws_lb_target_group_attachment" "tg_attach_1" {
   target_group_arn = module.k8-alb.alb-tg-arn
@@ -150,7 +156,8 @@ resource "aws_lb_target_group_attachment" "tg_attach_2" {
   port             = 80
 }
 
-*/
+
+
 
 resource "aws_eip" "eip1" {
   instance = module.k8-master.ec2-instanceid

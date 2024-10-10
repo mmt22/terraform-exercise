@@ -31,7 +31,7 @@ variable "vpc_security_group_ids" {
 variable "iam_instance_profile" {
   type        = string
   description = "iam instance profile"
-  default     = "SSM-ROLE-EC2"
+  default     = "EC2-ROLE-SSM"
 }
 
 variable "ami" {
@@ -40,17 +40,6 @@ variable "ami" {
   default     = "ami-0f58b397bc5c1f2e8"
 }
 
-variable "db-username" {
-  type        = string
-  description = "db-username"
-  default     = "wpdbadmin"
-}
-
-variable "db-password" {
-  type        = string
-  description = "db-password"
-  default     = "0f58b397bc5c1f2e8"
-}
 
 
 

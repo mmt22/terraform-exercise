@@ -77,9 +77,7 @@ sudo systemctl restart kubelet
 
 #### Need to configure mater node first and change the join command below ###
 
-kubeadm join 27.0.1.188:6443 --token ufmtxz.95aqcfwahw3v5ivt \
-        --discovery-token-ca-cert-hash sha256:20171b58016d01b566505e3beba0ce52732567bcff028fac2af166b0e5bfa87e
-
+kubeadm join 172.31.34.224:6443 --token mypqpx.b2gzaxmu3qiftw6j --discovery-token-ca-cert-hash sha256:281cb2c119a145bf11563883c582836303e1e6b53d4044840c533b3b4820008f
 sudo systemctl restart kubelet
 sudo systemctl restart kubelet
 
